@@ -80,12 +80,12 @@ function startNetwork(host,codeArg){
  if(host){
    const id='fly-'+makeId();
    peer=new Peer(id,{debug:0});
-   peer.on('open',id=>{localId=id;hostId=id;beginGame()});
+   peer.on('open',id=>{localId=id;hostId=id;startGame()});
    peer.on('connection',c=>setupConn(c));
    peer.on('error',e=>setMenu('Network error: '+e.type));
  }else{
    peer=new Peer(undefined,{debug:0});
-   peer.on('open',id=>{localId=id;hostId='fly-'+codeArg;const c=peer.connect(hostId,{reliable:true});setupConn(c);setTimeout(()=>beginGame(),500)});
+   peer.on('open',id=>{localId=id;hostId='fly-'+codeArg;const c=peer.connect(hostId,{reliable:true});setupConn(c);setTimeout(()=>startGame(),500)});
    peer.on('error',e=>setMenu('Could not join that party. Check the code and try again.'));
  }
 }
